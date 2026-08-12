@@ -37,6 +37,50 @@ export default function Calculator() {
     }
   }, []);
 
+  // Keyboard Support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA") {
+        return;
+      }
+      
+      const key = e.key;
+      if (/[0-9]/.test(key)) {
+        e.preventDefault();
+        handleNumber(key);
+      } else if (key === ".") {
+        e.preventDefault();
+        handleDecimal();
+      } else if (key === "+") {
+        e.preventDefault();
+        handleOperator("+");
+      } else if (key === "-") {
+        e.preventDefault();
+        handleOperator("-");
+      } else if (key === "*") {
+        e.preventDefault();
+        handleOperator("×");
+      } else if (key === "/") {
+        e.preventDefault();
+        handleOperator("÷");
+      } else if (key === "Enter" || key === "=") {
+        e.preventDefault();
+        handleEqual();
+      } else if (key === "Backspace") {
+        e.preventDefault();
+        handleBackspace();
+      } else if (key === "Escape") {
+        e.preventDefault();
+        handleClear();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [display, formula, shouldReset, history]);
+
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
