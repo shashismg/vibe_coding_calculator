@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light Mode Variables */
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --calc-bg: rgba(255, 255, 255, 0.45);
+  --calc-border: rgba(255, 255, 255, 0.4);
+  --calc-shadow: 0 20px 50px rgba(31, 38, 135, 0.15);
+  --text-main: #2d3748;
+  --text-secondary: #718096;
+  --display-bg: rgba(255, 255, 255, 0.3);
+  
+  /* Button Colors */
+  --btn-num-bg: rgba(255, 255, 255, 0.6);
+  --btn-num-hover: rgba(255, 255, 255, 0.8);
+  --btn-num-text: #2d3748;
+  
+  --btn-op-bg: rgba(99, 102, 241, 0.15);
+  --btn-op-hover: rgba(99, 102, 241, 0.3);
+  --btn-op-text: #4f46e5;
+  
+  --btn-fn-bg: rgba(245, 158, 11, 0.15);
+  --btn-fn-hover: rgba(245, 158, 11, 0.3);
+  --btn-fn-text: #d97706;
+
+  --btn-eq-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --btn-eq-hover: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  --btn-eq-text: #ffffff;
+  
+  --glass-blur: blur(20px);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+[data-theme="dark"] {
+  /* Dark Mode Variables */
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --calc-bg: rgba(30, 41, 59, 0.45);
+  --calc-border: rgba(255, 255, 255, 0.08);
+  --calc-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+  --display-bg: rgba(15, 23, 42, 0.4);
+  
+  /* Button Colors */
+  --btn-num-bg: rgba(255, 255, 255, 0.07);
+  --btn-num-hover: rgba(255, 255, 255, 0.15);
+  --btn-num-text: #f8fafc;
+  
+  --btn-op-bg: rgba(99, 102, 241, 0.25);
+  --btn-op-hover: rgba(99, 102, 241, 0.4);
+  --btn-op-text: #a5b4fc;
+  
+  --btn-fn-bg: rgba(245, 158, 11, 0.2);
+  --btn-fn-hover: rgba(245, 158, 11, 0.35);
+  --btn-fn-text: #fbbf24;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --btn-eq-bg: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  --btn-eq-hover: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --btn-eq-text: #ffffff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  font-family: var(--font-outfit), sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--calc-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--calc-border);
+  box-shadow: var(--calc-shadow);
+  border-radius: 24px;
+}
+
+.glass-display {
+  background: var(--display-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--calc-border);
+  border-radius: 16px;
+}
+
+/* Scrollbar styles for history logs */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
 }
